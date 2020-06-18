@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Meesterproef", "Meesterproe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "..\Logic\Logic.csproj", "{B64F36D9-A414-4F51-9D51-80DFF99883FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "..\Exceptions\Exceptions.csproj", "{3E5B0BBF-F4A0-4FC0-98EB-48FF34B058C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "..\Exceptions\Exceptions.csproj", "{3E5B0BBF-F4A0-4FC0-98EB-48FF34B058C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{7F27B9ED-AEC5-4E50-91FC-DCCA2F4EA79B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\Data\Data.csproj", "{7F27B9ED-AEC5-4E50-91FC-DCCA2F4EA79B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "..\Interfaces\Interfaces.csproj", "{7109F23D-F464-4E8F-A4A2-08379FB91130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "..\Interfaces\Interfaces.csproj", "{7109F23D-F464-4E8F-A4A2-08379FB91130}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{9C12CD53-CEE9-4D9D-965E-746BDA9A4638}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7109F23D-F464-4E8F-A4A2-08379FB91130}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7109F23D-F464-4E8F-A4A2-08379FB91130}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7109F23D-F464-4E8F-A4A2-08379FB91130}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C12CD53-CEE9-4D9D-965E-746BDA9A4638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C12CD53-CEE9-4D9D-965E-746BDA9A4638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C12CD53-CEE9-4D9D-965E-746BDA9A4638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C12CD53-CEE9-4D9D-965E-746BDA9A4638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

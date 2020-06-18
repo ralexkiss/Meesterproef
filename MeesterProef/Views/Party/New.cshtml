@@ -1,0 +1,38 @@
+﻿@model Meesterproef.Models.PartyViewModel
+@{
+    ViewData["Title"] = "Project";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Nieuw Partij</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                 <form asp-action="new" enctype="multipart/form-data">
+                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                     <div class="form-group">
+                         <label asp-for="Abbreviation"></label>
+                         <input asp-for="Abbreviation" class="form-control" />
+                         <span asp-validation-for="Abbreviation" class="text-danger"></span>
+                     </div>
+
+                     <div class="form-group">
+                         <label asp-for="Name"></label>
+                         <input asp-for="Name" class="form-control" />
+                         <span asp-validation-for="Name" class="text-danger"></span>
+                     </div><div class="form-group">
+                         <label asp-for="Leader"></label>
+                         <input asp-for="Leader" class="form-control"></input>
+                         <span asp-validation-for="Leader" class="text-danger"></span>
+                     </div>
+                     <div class="form-group">
+                         <button type="submit" class="button">Voeg Partij toe</button>
+                     </div>
+                 </form>
+            </section>
+        </div>
+    </div>
+</body>

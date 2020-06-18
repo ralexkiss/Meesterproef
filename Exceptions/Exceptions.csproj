@@ -4,9 +4,4 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Results\" />
-    <Folder Include="Party\" />
-  </ItemGroup>
-
 </Project>

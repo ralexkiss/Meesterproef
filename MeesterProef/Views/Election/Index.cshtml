@@ -1,0 +1,25 @@
+﻿@using System.Linq;
+@using Logic;
+@{
+    List<Election> elections = ViewBag.Elections;
+    ViewData["Title"] = "Elections";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Verkiezingen</h1>
+    <div class="results-container">
+        @if (elections.Any())
+        {
+            @foreach (Election election in elections)
+            {
+                <div class="card account-body">
+                    <div class="card-body">
+                        <h3><a class="card-title" asp-controller="Election" asp-action="info" asp-route-id="@election.ID">@election.Name</a></h3>
+                        <a class="card-text">Te verdelen Zetels: @election.DistributableSeats</a><br />
+                        <a class="card-text">Datum: @election.Date.ToString("dd/MM/yyyy")</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

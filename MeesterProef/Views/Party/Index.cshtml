@@ -1,0 +1,26 @@
+﻿@using System.Linq;
+@using Logic;
+@{
+    List<Party> parties = ViewBag.Parties;
+    ViewData["Title"] = "Partijen";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Partijen</h1>
+    <div class="results-container">
+        @if (parties.Any())
+        {
+            @foreach (Party party in parties)
+            {
+                <div class="card account-body">
+                    <div class="card-body">
+                        <h3><a class="card-title">@party.Abbreviation</a></h3>
+                        <a class="card-text">Volledige naam: @party.Name</a>
+                        <br />
+                        <a class="card-text">Lijsttrekker: @party.Leader</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

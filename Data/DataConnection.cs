@@ -13,7 +13,7 @@ namespace Data
             Password = "QmR@=gRwucyMpuoSanFc7oa5"
         }.ConnectionString;
 
-        public static MySqlConnection getConnection()
+        public static MySqlConnection GetConnection()
         {
             return new MySqlConnection(ConnectionString);
         }

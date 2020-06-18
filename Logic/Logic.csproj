@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Collections\" />
-  </ItemGroup>
-
 </Project>

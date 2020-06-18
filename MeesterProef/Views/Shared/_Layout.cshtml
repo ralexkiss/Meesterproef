@@ -23,6 +23,28 @@
                         <li class="nav-item nav-floatleft">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        <li class="nav-item nav-floatleft">
+                            <div class="nav-floatright dropdown">
+                                <a class="dropdown-toggle nav-link text-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Verkiezingen 
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-controller="election" asp-action="index">Alle verkiezingen</a>
+                                    <a class="dropdown-item" asp-controller="election" asp-action="new">Nieuw</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item nav-floatleft">
+                            <div class="nav-floatright dropdown">
+                                <a class="dropdown-toggle nav-link text-dark" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Partijen
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-controller="party" asp-action="index">Alle partijen</a>
+                                    <a class="dropdown-item" asp-controller="party" asp-action="new">Nieuw</a>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -36,7 +58,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - MyWiki
+            &copy; 2020 - Meesterproef
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
