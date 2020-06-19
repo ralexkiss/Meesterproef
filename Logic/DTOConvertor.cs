@@ -7,8 +7,7 @@ namespace Logic
 {
     public class DTOConvertor
     {
-
-        internal static PartyProfileDTO GetPartyDTO(PartyProfile party)
+        public static PartyProfileDTO GetPartyProfileDTO(PartyProfile party)
         {
             PartyProfileDTO dto = new PartyProfileDTO
             {
@@ -20,7 +19,7 @@ namespace Logic
             return dto;
         }
 
-        internal static PartyProfile GetPartyProfileFromDTO(PartyProfileDTO dto)
+        public static PartyProfile GetPartyProfileFromDTO(PartyProfileDTO dto)
         {
             PartyProfile party = new PartyProfile
             {
@@ -32,7 +31,7 @@ namespace Logic
             return party;
         }
 
-        internal static List<PartyProfile> GetPartyProfilesFromDTO(List<PartyProfileDTO> list)
+        public static List<PartyProfile> GetPartyProfilesFromDTO(List<PartyProfileDTO> list)
         {
             List<PartyProfile> parties = new List<PartyProfile>();
             foreach (PartyProfileDTO partyProfileDTO in list)
@@ -42,7 +41,7 @@ namespace Logic
             return parties;
         }
 
-        internal static PartyDTO GetPartyDTO(Party party)
+        public static PartyDTO GetPartyDTO(Party party)
         {
             PartyDTO dto = new PartyDTO
             {
@@ -55,7 +54,7 @@ namespace Logic
             return dto;
         }
 
-        internal static Party GetPartyFromDTO(PartyDTO dto)
+        public static Party GetPartyFromDTO(PartyDTO dto)
         {
             Party party = new Party
             {
@@ -68,7 +67,7 @@ namespace Logic
             return party;
         }
 
-        internal static List<Party> GetPartyList(List<PartyDTO> list)
+        public static List<Party> GetPartyList(List<PartyDTO> list)
         {
             List<Party> parties = new List<Party>();
             foreach (PartyDTO Partydto in list)
@@ -79,7 +78,7 @@ namespace Logic
         }
 
 
-        internal static ElectionDTO GetElectionDTO(Election election)
+        public static ElectionDTO GetElectionDTO(Election election)
         {
             ElectionDTO dto = new ElectionDTO
             {
@@ -92,7 +91,7 @@ namespace Logic
             return dto;
         }
 
-        internal static Election GetElectionFromDTO(ElectionDTO dto)
+        public static Election GetElectionFromDTO(ElectionDTO dto)
         {
             Election election = new Election
             {
@@ -105,7 +104,7 @@ namespace Logic
             return election;
         }
 
-        internal static List<Election> GetElectionList(List<ElectionDTO> list)
+        public static List<Election> GetElectionList(List<ElectionDTO> list)
         {
             List<Election> elections = new List<Election>();
             foreach (ElectionDTO electionDTO in list)

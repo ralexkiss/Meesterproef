@@ -14,6 +14,12 @@ namespace Logic.Collections
             partyRepository.CreateParty(DTOConvertor.GetPartyDTO(party));
         }
 
+        public List<Party> Search(string searchQuery)
+        {
+            return DTOConvertor.GetPartyList(partyRepository.Search(searchQuery));
+        }
+
+
         public Party GetPartyByID(int id)
         {
             Party party = DTOConvertor.GetPartyFromDTO(partyRepository.GetPartyByID(id));

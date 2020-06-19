@@ -39,7 +39,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new GetPartyByIDFailedException();
+                throw new GetPartyByIDFailedException("We konden de door u verzochte partij niet vinden.");
             }
         }
 
@@ -50,7 +50,7 @@ namespace Data.Contexts
                 using (connection = DataConnection.GetConnection())
                 {
                     connection.Open();
-                    MySqlCommand command = new MySqlCommand($"SELECT * FROM Party WHERE Name LIKE '{searchQuery}%'", connection);
+                    MySqlCommand command = new MySqlCommand($"SELECT * FROM Party WHERE Abbreviation LIKE '{searchQuery}%'", connection);
                     command.Parameters.AddWithValue("@SearchQuery", searchQuery);
                     MySqlDataReader reader = command.ExecuteReader();
                     List<PartyDTO> parties = new List<PartyDTO>();
@@ -70,7 +70,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new SearchFailedException("An unexpected error occured.");
+                throw new SearchFailedException("We konden de door u verzochte partij niet vinden.");
             }
         }
 
@@ -92,7 +92,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new CreatingPartyFailedException("An unexpected error occured.");
+                throw new CreatingPartyFailedException("We konden de door u ingevulde partij niet aanmaken.");
             }
         }
 
@@ -115,7 +115,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new UpdatingPartyFailedException();
+                throw new UpdatingPartyFailedException("Het opslaan van de partij is mislukt.");
             }
         }
 
@@ -145,7 +145,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new SearchFailedException("An unexpected error occured.");
+                throw new SearchFailedException("");
             }
         }
 
@@ -206,7 +206,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new SearchFailedException("An unexpected error occured.");
+                throw new SearchFailedException("Het ophalen van alle partijen is mislukt.");
             }
         }
     }

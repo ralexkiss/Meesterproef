@@ -15,6 +15,19 @@ namespace Logic
             return partyRepository;
         }
 
+
+        internal static IPartyProfileRepository GetPartyProfileRepository()
+        {
+            IPartyProfileRepository partyProfileRepository = new PartyProfileRepository(new PartyProfileSqlContext());
+            return partyProfileRepository;
+        }
+
+        internal static IElectionRepository GetElectionRepository()
+        {
+            IElectionRepository electionRepository = new ElectionRepository(new ElectionSqlContext());
+            return electionRepository;
+        }
+
         public static IPartyRepository GetPartyRepository()
         {
             IPartyRepository partyRepository = new PartyRepository(new PartySqlContext());

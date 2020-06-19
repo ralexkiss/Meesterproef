@@ -12,5 +12,6 @@ namespace Interfaces.Repositories
         ElectionDTO GetElectionByID(int id);
         List<PartyProfileDTO> GetAllPartyProfiles(ElectionDTO election);
         List<ElectionDTO> GetAllElections();
+        void CreatePartyProfile(int id, PartyProfileDTO partyProfile);
     }
 }

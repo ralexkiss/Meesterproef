@@ -1,5 +1,6 @@
 ﻿using Data.Repositories;
 using Exceptions.Election;
+using Exceptions.PartyProfile;
 using Interfaces.Contexts;
 using Interfaces.DTO;
 using Interfaces.Repositories;
@@ -42,7 +43,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new GetElectionByIDFailedException();
+                throw new GetElectionByIDFailedException("We konden de door u verzochte verkiezing niet vinden.");
             }
         }
 
@@ -65,7 +66,30 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new UpdatingElectionFailedException();
+                throw new UpdatingElectionFailedException("Opslaan verkiezing is mislukt.");
+            }
+        }
+
+        public void CreatePartyProfile(int id, PartyProfileDTO partyProfile)
+        {
+            try
+            {
+                using (connection = DataConnection.GetConnection())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand("INSERT INTO PartyProfile(PartyID, ElectionID, Votes, Seats) VALUES (@PartyID, @ElectionID, @Votes, @Seats)", connection))
+                    {
+                        command.Parameters.AddWithValue("@ElectionID", id);
+                        command.Parameters.AddWithValue("@PartyID", partyProfile.Party.ID);
+                        command.Parameters.AddWithValue("@Votes", partyProfile.Votes);
+                        command.Parameters.AddWithValue("@Seats", partyProfile.Seats);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                throw new CreatingPartyProfileFailedException("Het maken van een profiel voor de gegeven partij is mislukt.");
             }
         }
 
@@ -87,7 +111,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new CreatingElectionFailedException("An unexpected error occured.");
+                throw new CreatingElectionFailedException("De door u ingevoerde verkiezing kan niet worden aangemaakt.");
             }
         }
 
@@ -116,7 +140,7 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new SearchFailedException("An unexpected error occured.");
+                throw new Exceptions.Election.SearchFailedException("Het ophalen van alle verkiezingen is mislukt.");
             }
         }
 
@@ -138,7 +162,7 @@ namespace Data.Contexts
                             ID = (int)reader["ID"],
                             Votes = (int)reader["Votes"],
                             Seats = (int)reader["Seats"],
-                            Party = partyRepository.GetPartyByID((int)reader["OldPartyID"])
+                            Party = partyRepository.GetPartyByID((int)reader["PartyID"])
                         });
                     }
                     return partyProfileDTOs;
@@ -146,7 +170,28 @@ namespace Data.Contexts
             }
             catch (MySqlException)
             {
-                throw new SearchFailedException("An unexpected error occured.");
+                throw new Exceptions.PartyProfile.SearchFailedException("Het ophalen van alle partij profielen is mislukt.");
+            }
+        }
+
+        public void CreateCoalition(CoalitionDTO coalition)
+        {
+            try
+            {
+                using (connection = DataConnection.GetConnection())
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand("INSERT INTO Coalition(ElectionID, PrimeMinister) VALUES (@ElectionID, @PrimeMinister)", connection))
+                    {
+                        command.Parameters.AddWithValue("@ElectionID", coalition.election.ID);
+                        command.Parameters.AddWithValue("@PrimeMinister", coalition.PrimeMinister);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                throw new CreatingElectionFailedException("Coalitie maken mislukt.");
             }
         }
     }

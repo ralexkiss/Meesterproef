@@ -6,7 +6,7 @@ namespace Meesterproef.Models
     {
         [Required]
         [DataType(DataType.Text)]
-        [StringLength(5)]
+        [StringLength(20)]
         public string Abbreviation { get; set; }
         [Required]
         [DataType(DataType.Text)]

@@ -6,8 +6,8 @@ namespace Meesterproef.Models
     {
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Username")]
-        [StringLength(30)]
+        [Display(Name = "Partij Afkorting")]
+        [StringLength(20)]
         public string Query { get; set; }
     }
 }

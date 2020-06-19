@@ -1,0 +1,29 @@
+﻿@model Meesterproef.Models.PartyProfileViewModel
+@{
+    ViewData["Title"] = "Aantal stemmen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <title>Voer de hoeveelheid stemmen in.</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>@ViewBag.Party.Abbreviation</h3>
+            <section>
+                 <form asp-action="AddResult" asp-route-election="@ViewBag.Election.ID" asp-route-party="@ViewBag.Party.ID" enctype="multipart/form-data">
+                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                     <div class="form-group">
+                         <label asp-for="Votes"></label>
+                         <input asp-for="Votes" class="form-control" />
+                         <span asp-validation-for="Votes" class="text-danger"></span>
+                    </div>
+                     <div class="form-group">
+                         <button asp-route-electionid="@ViewBag.Election.ID" asp-route-partyid="@ViewBag.Party.ID" type="submit" class="button">Add Result</button>
+                     </div>
+                 </form>
+            </section>
+        </div>
+    </div>
+</body>

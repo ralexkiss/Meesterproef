@@ -12,5 +12,8 @@ namespace Interfaces.Contexts
         ElectionDTO GetElectionByID(int id);
         List<PartyProfileDTO> GetAllPartyProfiles(ElectionDTO election);
         List<ElectionDTO> GetAllElections();
+        void Save(ElectionDTO election);
+        void CreateCoalition(CoalitionDTO coalition);
+        void CreatePartyProfile(int id, PartyProfileDTO partyProfile);
     }
 }

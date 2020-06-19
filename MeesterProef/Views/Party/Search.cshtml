@@ -1,0 +1,45 @@
+﻿@model Meesterproef.Models.SearchViewModel
+@using System.Linq;
+@using Logic;
+@{
+    List<Party> parties = ViewBag.Parties;
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="~/css/user-search.css" />
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                <form asp-action="search" asp-route-electionid="@ViewBag.ElectionID">
+                    <div class="form-group">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="Query" class="form-control" placeholder="Afkorting" />
+                        <span asp-validation-for="Query" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" asp-route-electionid="@ViewBag.ElectionID" class="button">Search</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="results-container">
+        @if (parties.Any())
+        {
+            @foreach (Party party in parties)
+            {
+                <div class="card account-body">
+                    <div class="card-body">
+                        <h3><a class="card-title" asp-controller="election" asp-action="AddResult" asp-route-electionid="@ViewBag.ElectionID" asp-route-partyid="@party.ID">@party.Abbreviation</a></h3>
+                        <a class="card-text">Volledige naam: @party.Name</a>
+                        <br />
+                        <a class="card-text">Lijsttrekker: @party.Leader</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</body>

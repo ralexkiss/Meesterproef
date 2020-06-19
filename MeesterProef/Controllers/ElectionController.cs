@@ -15,10 +15,12 @@ namespace Meesterproef.Controllers
     public class ElectionController : Controller
     {
         private readonly ElectionCollection electionCollection;
+        private readonly PartyCollection partyCollection;
 
         public ElectionController()
         {
             electionCollection = new ElectionCollection();
+            partyCollection = new PartyCollection();
         }
 
         [HttpGet]
@@ -35,8 +37,50 @@ namespace Meesterproef.Controllers
             {
                 return RedirectToAction("Index", "Election");
             }
+            CalculateSeats(election);
             ViewBag.Election = election;
             return View();
+        }
+
+
+        [HttpGet]
+        public IActionResult AddResult(int electionid, int partyid)
+        {
+            ViewBag.Election = electionCollection.GetElectionByID(electionid);
+            ViewBag.Party = partyCollection.GetPartyByID(partyid);
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddResult(int electionid, int partyid, PartyProfileViewModel partyProfile)
+        {
+            Election election = electionCollection.GetElectionByID(electionid);
+            Party party = partyCollection.GetPartyByID(partyid);
+            ViewBag.Election = election;
+            ViewBag.Party = party;
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            try
+            {
+                PartyProfile newPartyProfile = new PartyProfile
+                {
+                    Votes = partyProfile.Votes,
+                    Party = party
+                };
+                election.PartyProfiles.Add(newPartyProfile);
+                newPartyProfile.Seats = CalculateSeatsForPartyProfile(election, newPartyProfile);
+                electionCollection.CreatePartyProfile(election.ID, newPartyProfile);
+                return RedirectToAction("Info", "Election", new { id = election.ID });
+            }
+            catch (CreatingElectionFailedException exception)
+            {
+                ModelState.AddModelError("", exception.Message);
+                return View();
+            }
         }
 
         [HttpGet]
@@ -73,5 +117,33 @@ namespace Meesterproef.Controllers
                 return View();
             }
         }
+
+        private void CalculateSeats(Election election)
+        {
+            if (election.PartyProfiles.Any())
+            {
+                int AllSeats = 0;
+                foreach (PartyProfile partyProfile in election.PartyProfiles)
+                {
+                    int CalculatedSeats = CalculateSeatsForPartyProfile(election, partyProfile);
+
+                    AllSeats = AllSeats + CalculatedSeats;
+
+                    if (AllSeats > election.DistributableSeats)
+                    {
+                        CalculatedSeats = CalculatedSeats - (AllSeats - election.DistributableSeats);
+                    }
+                    partyProfile.Seats = CalculatedSeats;
+                    partyProfile.Save(election.ID, partyProfile);
+                }
+            }
+        }
+
+        private int CalculateSeatsForPartyProfile(Election election, PartyProfile partyProfile)
+        {
+            decimal totalVotes = election.PartyProfiles.Sum(party => party.Votes);
+            decimal votes = partyProfile.Votes / totalVotes;
+            return (int)decimal.Round(votes * election.DistributableSeats);
+        }
     }
-}
+}   

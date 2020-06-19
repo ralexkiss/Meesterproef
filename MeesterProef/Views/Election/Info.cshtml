@@ -11,27 +11,68 @@
     <h4>Stemmen: @election.PartyProfiles.Sum(party => party.Votes)</h4>
 }
 <h5>Datum: @election.Date.ToString("dd/MM/yyyy")</h5>
-<hr />
-<div class="results-container">
-    @if (election.PartyProfiles.Any())
-    {
-        @foreach (PartyProfile party in election.PartyProfiles)
-        {
-            <div class="card account-body">
-                <div class="card-body">
-                    <h3><a class="card-title" asp-controller="Party" asp-action="info" asp-route-id="@party.ID">@party.Party.Abbreviation</a></h3>
-                    <a class="card-text">Stemmen: @party.Votes</a>
-                    <a class="card-text">Zetels: @party.Seats</a>
-                </div>
-            </div>
-        }
-    }
-</div>
-<form asp-action="AddParty">
-    <button type="submit" method="post" class="button-negative" asp-controller="Election"
-            asp-action="AddParty" asp-route-election="@election">
-        Add Party
+<form asp-action="Search">
+    <button type="submit" method="post" class="button" asp-controller="Party"
+            asp-action="Search" asp-route-electionid="@election.ID">
+        Add Result
     </button>
 </form>
+@*<div class="nav-floatright">
+    <form asp-action="Coalition">
+        <button type="submit" method="post" class="button-negative" asp-controller="Election"
+                asp-action="Coalition" asp-route-electionid="@election.ID">
+            Check Coalition
+        </button>
+    </form>
+</div>*@
+    <hr />
+    <div class="results-container">
+        @if (election.PartyProfiles.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Partij
+                        </th>
+                        <th>
+                            Stemmen
+                        </th>
+                        <th>
+                            Zetels
+                        </th>
+                        @*<th>
+                            Coalitie
+                        </th>*@
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (PartyProfile party in election.PartyProfiles)
+                    {
+                        <tr>
+                            <td>
+                                <h3><a class="card-title" asp-controller="Party" asp-action="info" asp-route-id="@party.Party.ID">@party.Party.Abbreviation</a></h3>
+                            </td>
+                            <td>
+                                <a class="card-text">Stemmen: @party.Votes</a>
+                            </td>
+                            <td>
+                                <a class="card-text">Zetels: @party.Seats</a>
+                            </td>
+                            @*<td>
+                                <form asp-action="AddToCoalition">
+                                    <button type="submit" method="post" class="button" asp-controller="Election"
+                                            asp-action="AddToCoalition" asp-route-electionid="@election.ID" asp-route-partyprofileid="@party.ID">
+                                        Toevoegen
+                                    </button>
+                                </form>
+                            </td>*@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
 
 

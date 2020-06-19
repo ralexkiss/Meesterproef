@@ -10,17 +10,43 @@
     <div class="results-container">
         @if (parties.Any())
         {
-            @foreach (Party party in parties)
-            {
-                <div class="card account-body">
-                    <div class="card-body">
-                        <h3><a class="card-title">@party.Abbreviation</a></h3>
-                        <a class="card-text">Volledige naam: @party.Name</a>
-                        <br />
-                        <a class="card-text">Lijsttrekker: @party.Leader</a>
-                    </div>
-                </div>
-            }
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Naam
+                        </th>
+                        <th>
+                            Afkorting
+                        </th>
+                        <th>
+                            Lijsttrekker
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Party party in parties)
+                    {
+                        <tr>
+                            <td>@party.Abbreviation</td>
+                            <td>@party.Name</td>
+                            <td>@party.Leader</td>
+                            <td>
+                                <form asp-action="Edit">
+                                    <button type="submit" method="post" class="button" asp-controller="Party"
+                                            asp-action="Edit" asp-route-id="@party.ID">
+                                        Aanpassen
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
         }
     </div>
 </div>
