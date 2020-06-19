@@ -57,7 +57,8 @@ namespace UnitTests
             Election election = new Election
             {
                 Name = "Tweede Kamerverkiezingen 2019",
-                DistributableSeats = 150,
+                DistributableSeats = 0,
+                Date = DateTime.Now,
                 PartyProfiles = new List<PartyProfile>()
             };
             electionRepository.CreateElection(DTOConvertor.GetElectionDTO(election));

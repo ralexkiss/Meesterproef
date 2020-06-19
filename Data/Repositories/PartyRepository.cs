@@ -23,8 +23,6 @@ namespace Data.Repositories
         {
             Context.CreateParty(party);
         }
-
-
         public List<PartyDTO> GetPartyHistory(PartyDTO party)
         {
             return Context.GetPartyHistory(party);

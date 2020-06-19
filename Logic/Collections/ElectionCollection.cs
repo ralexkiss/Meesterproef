@@ -11,13 +11,7 @@ namespace Logic.Collections
         private IElectionCollectionRepository electionRepository = RepositoryFactory.GetElectionCollectionRepository();
         public void CreateElection(Election election)
         {
-            if (election.Date != null || election.Name != null || election.DistributableSeats <= 0)
-            {
-                electionRepository.CreateElection(DTOConvertor.GetElectionDTO(election));
-            } else
-            {
-                throw new CreatingElectionFailedException("Niet alle benodigde gegevens zijn ingevuld.");
-            }
+            electionRepository.CreateElection(DTOConvertor.GetElectionDTO(election));
         }
 
         public Election GetElectionByID(int id)

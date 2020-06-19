@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Exceptions.Election;
 using Interfaces.Contexts;
 using Interfaces.DTO;
 using Interfaces.Repositories;
@@ -21,6 +22,10 @@ namespace Data.Repositories
 
         public void CreateElection(ElectionDTO election)
         {
+            if (election.Date == null || election.Name == null || election.DistributableSeats <= 0)
+            {
+                throw new CreatingElectionFailedException("Niet alle benodigde gegevens zijn ingevuld.");
+            }
             Context.CreateElection(election);
         }
 
